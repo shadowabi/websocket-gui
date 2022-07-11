@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "utf-8">
+	<meta name = "viewport" content = "width=device-width, initial-scale=1">
+	<title>websocket gui</title>
+	<script type = "text/javascript" src = "http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" async>
+		function Empty()
+		{
+			$("#output").html("");
+		}
+
+		function DisConnect()
+		{
+			socket.close();
+		}
+
+		function Connect()
+		{
+			target = $("#target").val();
+			socket = new WebSocket(target);
+
+			socket.onmessage = function(event)
+			{
+				$("#output").append("<p style = 'color: green;'>[+] Msssage Received：" + event.data + "</p>");
+			}
+	 
+			socket.onclose = function(event)
+			{
+				$("#output").append("<p style = 'color: gray;'>[-] WebSocket disconnect</p>");
+			}
+	 
+			socket.onerror = function(event) 
+			{
+				$("#output").append("<p style = 'color: red;'>[-] Fail to connect：" + target + "</p>");
+			}
+
+			socket.onopen = function(event)
+			{
+				$("#output").append("<p style = 'color: blue;'>[+] Success to connect：" + target + "</p>");
+			}		
+		}
+
+		function Send() {
+			msg = $("#message").val();
+			if (typeof socket === "undefined" || socket.readyState == 3)
+			{
+				$("#output").append("<p style = 'color: red;'>[-] Fail to Send Message：" + target + "</p>");
+				return false;
+			}
+			$("#message").html("");
+			socket.send(msg);
+		}
+	</script>
+</head>
+<body>
+	<form action = "#" method = "post" name = "FormSubmit" id = "FormSubmit">
+		<p>连接地址：<input type = "text" id = "target" placeholder = "ws://127.0.0.1:8080" /></p>
+		<p>发送信息：<input type = "text" id = "message" /></p>
+		<input id = "Submit" type = "button" value = "连接" onclick = Connect()></input>
+		<input id = "Submit" type = "button" value = "发送" onclick = Send()></input>
+		<input id = "Submit" type = "button" value = "断开" onclick = DisConnect()></input>
+		<input id = "Submit" type = "button" value = "清空" onclick = Empty()></input>
+	</form>
+	<div id = "output" />
+</body>
+<style type="text/css">
+	body
+	{
+  		margin: 0 auto;
+  		text-align: center;
+	}
+
+	button,input
+	{
+	    display: inline-block;
+	    margin-bottom: 0;
+	    font-size: 14px;
+	    font-weight: 400;
+	    text-align: center;
+	    white-space: nowrap;
+	    vertical-align: middle;
+	    -ms-touch-action: manipulation;
+	    touch-action: manipulation;
+	    cursor: pointer;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	    background-image: none;
+	    padding: 0 10px;
+	    height: 34px;
+	    max-width: 98%;
+	    line-height: normal;
+	    border: 1px solid #ddd;
+	    border-radius: 3px;
+	    box-sizing: content-box;
+	}
+
+	#output
+	{
+		margin: 0 auto;
+		margin-top: 10px;
+		border: 1px solid #ccc;
+	    height: 360px;
+	    width: 70%;
+	    overflow: auto;
+	    text-align: left;
+	}
+</style>
+</html>
