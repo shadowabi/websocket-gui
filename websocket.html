@@ -8,7 +8,7 @@
 	<script type="text/javascript" async>
 		function Empty()
 		{
-			$("#output").html("");
+			$("#output").empty();
 		}
 
 		function DisConnect()
@@ -53,6 +53,50 @@
 			socket.send(msg);
 		}
 	</script>
+	<style type="text/css">
+		body
+		{
+	  		margin: 0 auto;
+	  		text-align: center;
+		}
+
+		button,input
+		{
+		    display: inline-block;
+		    margin-bottom: 0;
+		    font-size: 14px;
+		    font-weight: 400;
+		    text-align: center;
+		    white-space: nowrap;
+		    vertical-align: middle;
+		    -ms-touch-action: manipulation;
+		    touch-action: manipulation;
+		    cursor: pointer;
+		    -webkit-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
+		    background-image: none;
+		    padding: 0 10px;
+		    height: 34px;
+		    max-width: 98%;
+		    line-height: normal;
+		    border: 1px solid #ddd;
+		    border-radius: 3px;
+		    box-sizing: content-box;
+		}
+
+		#output
+		{
+			margin: 0 auto;
+			margin-top: 10px;
+			border: 1px solid #ccc;
+		    height: 360px;
+		    width: 70%;
+		    overflow: auto;
+		    text-align: left;
+		}
+	</style>
 </head>
 <body>
 	<form action = "#" method = "post" name = "FormSubmit" id = "FormSubmit">
@@ -65,48 +109,4 @@
 	</form>
 	<div id = "output" />
 </body>
-<style type="text/css">
-	body
-	{
-  		margin: 0 auto;
-  		text-align: center;
-	}
-
-	button,input
-	{
-	    display: inline-block;
-	    margin-bottom: 0;
-	    font-size: 14px;
-	    font-weight: 400;
-	    text-align: center;
-	    white-space: nowrap;
-	    vertical-align: middle;
-	    -ms-touch-action: manipulation;
-	    touch-action: manipulation;
-	    cursor: pointer;
-	    -webkit-user-select: none;
-	    -moz-user-select: none;
-	    -ms-user-select: none;
-	    user-select: none;
-	    background-image: none;
-	    padding: 0 10px;
-	    height: 34px;
-	    max-width: 98%;
-	    line-height: normal;
-	    border: 1px solid #ddd;
-	    border-radius: 3px;
-	    box-sizing: content-box;
-	}
-
-	#output
-	{
-		margin: 0 auto;
-		margin-top: 10px;
-		border: 1px solid #ccc;
-	    height: 360px;
-	    width: 70%;
-	    overflow: auto;
-	    text-align: left;
-	}
-</style>
 </html>
